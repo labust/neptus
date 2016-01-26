@@ -1361,8 +1361,10 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
 
                         plan.getGraph().addManeuver(m);
                         parsePlan();
-                        addedTransitions.add(plan.getGraph().addTransition(plan.getGraph().getLastManeuver().getId(),
-                                m.getId(), defaultCondition));
+                        if (plan.getGraph().getAllManeuvers().length > 1)
+                            addedTransitions.add(plan.getGraph().addTransition(plan.getGraph().getLastManeuver().getId(),
+                                    m.getId(), defaultCondition));
+                        
                         planElem.recalculateManeuverPositions(renderer);
 
                         manager.addEdit(new ManeuverAdded(m, plan, addedTransitions, removedTransitions));
